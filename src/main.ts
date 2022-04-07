@@ -3,12 +3,12 @@ import animation from './index';
 
 animation.init({
   general: {
-    timeBetween: 3,
+    timeBetween: 5,
     floor: 20,
     cor: .75
   },
   animations: {
-    bounceIn: { duration: 1, numberOfBounces: 1 },
+    bounceIn: { duration: 3, numberOfBounces: 3 },
   },
 });
 

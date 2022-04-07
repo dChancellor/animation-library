@@ -24,13 +24,21 @@ interface ModuleFunction {
   animate: (settings: Settings, elements: HTMLCollectionOf<Element>) => void;
 }
 
+type Easing = 'ease-in' | 'ease-out' | 'ease-in-out';
+
+interface BounceKeyframe {
+  offset?: number;
+  bottom?: number;
+  easing?: Easing;
+}
+
 interface AnimationSetupRoutines {
-  bounceIn: (keyframe: CSSRule, props: BounceIn) => void;
+  bounceIn: (settings: Settings, keyframe: CSSRule, props: BounceIn) => void;
 }
 
 interface AnimationRunRoutines {
   init: (props: Props) => void;
-  bounceIn: (settings: Settings, elements: HTMLCollectionOf<Element>) => void;
+  bounceIn: (elements: HTMLCollectionOf<Element>) => void;
 }
 
 interface Props {

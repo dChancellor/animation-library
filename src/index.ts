@@ -49,17 +49,17 @@ const init = (props: Props = settings) => {
       throw Error(`You are trying to set settings for ${key}, which is an invalid animation`);
     const emptyKeyframe = newKeyframeRule(sheet, key);
     newClass(sheet, key);
-    setupAnimation[key as keyof Animations](emptyKeyframe, value);
+    setupAnimation[key as keyof Animations](settings, emptyKeyframe, value);
   });
 };
 
 const setupAnimation: AnimationSetupRoutines = {
-  bounceIn: (keyframe, props) => bounceIn.setup(keyframe, props),
+  bounceIn: (settings, keyframe, props) => bounceIn.setup(settings, keyframe, props),
 };
 
 const animation: AnimationRunRoutines = {
   init: (props) => init(props),
-  bounceIn: (settings, elements) => bounceIn.animate(settings, elements),
+  bounceIn: (elements) => bounceIn.animate(settings, elements),
 };
 
 export default animation;
