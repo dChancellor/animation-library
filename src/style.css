@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  height: 100vmin;
+  width: 100vmin;
+}
+body {
+  background-color: var(--backgroundColor);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.container {
+  width: 500px;
+  height: 400px;
+  overflow: hidden;
+  background-color: purple;
+  color: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  animation-name: testAnimation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+.container > * {
+  position: absolute;
+  bottom: 100%;
+}
