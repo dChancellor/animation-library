@@ -1,3 +1,5 @@
+import animation, { cumulativeDuration, setCumulativeDuration } from './index';
+
 let keyframe: Keyframe[];
 
 const bounceReducer = (bounceCount: number, { cor, floor }: GeneralSettings): Keyframe[] => {
@@ -17,12 +19,20 @@ const bounceReducer = (bounceCount: number, { cor, floor }: GeneralSettings): Ke
 
 const animate = (delay: number, duration: number, elements: HTMLCollectionOf<Element>) => {
   let currentElement = 0;
-  setInterval(() => {
-    console.log(keyframe);
-
-    elements[currentElement].animate(keyframe, { duration: duration * 1000, iterations: 1 });
-    currentElement = currentElement < elements.length - 1 ? (currentElement += 1) : 0;
-  }, delay * 1000);
+  let animate: Animation;
+  setTimeout(() => {
+    setInterval(() => {
+      animate?.cancel();
+      animate = elements[currentElement].animate(keyframe, {
+        duration: duration * 1000,
+        iterations: 1,
+        fill: 'forwards',
+      });
+      currentElement = currentElement < elements.length - 1 ? (currentElement += 1) : 0;
+    }, delay * 1000);
+  }, cumulativeDuration * 1000);
+  setCumulativeDuration(duration);
+  return animation;
 };
 
 const setup = (settings: Settings) => {
@@ -52,6 +62,8 @@ const setup = (settings: Settings) => {
       previousKeyFramePercent = previousKeyFramePercent + bounceLength;
     }
   }
+  const atRest = { offset: 1, bottom: `${settings.general.floor}%`, easing: 'ease-out' };
+  keyframe = [...keyframe, atRest];
 };
 
 const bounceIn: ModuleFunction = {

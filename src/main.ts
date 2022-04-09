@@ -1,16 +1,15 @@
-import './style.css'
-import animation from './index';
+import './style.css';
+import AnimationSequence from './Sequence';
 
-animation.init({
-  general: {
-    timeBetween: 5,
-    floor: 20,
-    cor: .75
-  },
-  animations: {
-    bounceIn: { duration: 3, numberOfBounces: 3 },
-  },
-});
+const elements = document.getElementsByClassName('bouncers');
+const elements2 = document.getElementsByClassName('bouncers2');
 
-const items = document.getElementsByClassName('bouncers');
-animation.bounceIn(items);
+
+const bounceInAndOut = new AnimationSequence();
+const animation = new AnimationSequence();
+
+bounceInAndOut.init(elements);
+animation.init(elements2);
+
+bounceInAndOut.bounceIn().and().spin().then().spin();
+animation.bounceIn().then().spin();
